@@ -9,6 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+
+    let emojiSets = [
+    ["🇹🇼", "🇳🇿", "🇯🇵", "🇺🇸", "🇨🇦","🇰🇷", "🇬🇷", "🇩🇪"],
+    ["😙", "☺️", "😆", "😕", "🥵", "😠", "🤩", "😭"],
+    ]
     
     lazy var game: Concentration = Concentration(numberOfPairsCard: (cardButtons.count + 1) / 2)
     
@@ -25,6 +30,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
+    @IBAction func ResetGame(_ sender: UIButton) {
+        Reset()
+    }
+    
     @IBAction func touchCard(_ sender: UIButton) {
         flipCount += 1
         
@@ -38,6 +47,19 @@ class ViewController: UIViewController {
         
         
     }
+    
+    func Reset(){
+        game.Reset()
+        let emojiSetIndex = Int(arc4random_uniform(UInt32(emojiSets.count)))
+        emojiChoices = emojiSets[emojiSetIndex]
+        mapIndexEmoji.removeAll()
+        flipCount = 0
+        UpdateViewFromModel()
+    }
+    
+    lazy var emojiChoices = emojiSets[0]
+    var mapIndexEmoji = [Int:String]()
+    
     func UpdateViewFromModel(){
         for index in cardButtons.indices{
             let button = cardButtons[index]
@@ -54,39 +76,17 @@ class ViewController: UIViewController {
         }
     }
     
-    func flipCard(WithEmoji emoji :String, on button: UIButton) {
-        if (button.currentTitle == emoji){
-            button.setTitle("", for: UIControlState.normal)
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
-        }
-        else{
-            button.setTitle(emoji, for: UIControlState.normal)
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1)
-        }
-    }
-    
-    var emojiChoices = ["🇹🇼", "🇳🇿", "🇯🇵", "🇺🇸", "🇨🇦","🇰🇷"]
-    var mapIndexEmoji = [Int:String]()
-    
     func GetEmoji(for card: Card) -> String {
         
         if mapIndexEmoji[card.identifier] == nil, emojiChoices.count > 0{
             let randomInt = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             mapIndexEmoji[card.identifier] = emojiChoices.remove(at: randomInt)
         }
-        /*
-        if mapIndexEmoji[card.identifier] != nil {
-            return emojiChoices[card.identifier]!
-        }
-        else{
-            return "?"
-        }
-        */
         
-
         return mapIndexEmoji[card.identifier] ?? "?"
     }
     
 
+    
 }
 
