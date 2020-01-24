@@ -16,7 +16,10 @@ class Concentration {
         shuffleCards()
     }
     
-    var numberPairCards: Int
+    var numberPairCards: Int = 0
+    var gameScore: Int = 0
+    
+    
     
     var cards = [Card]()
     
@@ -27,6 +30,7 @@ class Concentration {
     var indexOfOneAndOnlyFaceUpCard: Int?
     
     func Reset(){
+        gameScore = 0
         cards.removeAll()
         for _ in 1...numberPairCards {
             let card = Card()
@@ -45,10 +49,20 @@ class Concentration {
             if cards[index].identifier == cards[matchIndex].identifier{
                 cards[matchIndex].isMatched = true
                 cards[index].isMatched = true
+                gameScore += 2
             }
             
             cards[index].isFaceUp = true
             indexOfOneAndOnlyFaceUpCard = nil
+            
+            
+            if cards[matchIndex].isVisit || cards[index].isVisit, !cards[index].isMatched{
+                gameScore -= 1;
+                gameScore = max(0, gameScore)
+            }
+            
+            cards[index].isVisit = true
+            cards[matchIndex].isVisit = true
         }
         
         else {
@@ -60,6 +74,7 @@ class Concentration {
             indexOfOneAndOnlyFaceUpCard = index
             
         }
+        
     }
     
 }

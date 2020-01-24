@@ -13,6 +13,10 @@ class ViewController: UIViewController {
     let emojiSets = [
     ["🇹🇼", "🇳🇿", "🇯🇵", "🇺🇸", "🇨🇦","🇰🇷", "🇬🇷", "🇩🇪"],
     ["😙", "☺️", "😆", "😕", "🥵", "😠", "🤩", "😭"],
+    ["🍟", "🍔", "🍕", "🍗", "🌭", "🥫", "🥞", "🍿"],
+    ["⚾️", "🏀", "⚽️", "🏈", "🎾", "🎱", "🏓", "🏒"],
+    ["♎️", "♋️", "♊️", "♉️", "♏️", "♈️", "♐️", "♓️"],
+    ["🦁", "🐷", "🦊", "🐱", "🐶", "🐨", "🐵", "🐥"],
     ]
     
     lazy var game: Concentration = Concentration(numberOfPairsCard: (cardButtons.count + 1) / 2)
@@ -28,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     
     
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var flipCountLabel: UILabel!
     
     @IBAction func ResetGame(_ sender: UIButton) {
@@ -40,12 +45,11 @@ class ViewController: UIViewController {
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             UpdateViewFromModel()
+            scoreLabel.text = "Score: \(game.gameScore)"
         }
         else{
             print("Chosen card doesn't exist!")
         }
-        
-        
     }
     
     func Reset(){

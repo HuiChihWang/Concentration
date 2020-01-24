@@ -17,9 +17,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Flip: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLr-z8-EAx">
-                                <rect key="frame" x="54" y="644" width="267" height="124"/>
+                                <rect key="frame" x="-29" y="571" width="267" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -177,12 +177,20 @@
                                     <action selector="ResetGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="67w-0o-pnS"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVv-GU-FVy">
+                                <rect key="frame" x="57" y="659" width="108" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="flipCountLabel" destination="oLr-z8-EAx" id="5WG-F7-Xou"/>
+                        <outlet property="scoreLabel" destination="vVv-GU-FVy" id="iMh-Sd-xIT"/>
                         <outletCollection property="cardButtons" destination="An9-Gb-7Te" collectionClass="NSMutableArray" id="kof-R9-rRj"/>
                         <outletCollection property="cardButtons" destination="C5D-Kt-kc3" collectionClass="NSMutableArray" id="CDc-ov-3Z2"/>
                         <outletCollection property="cardButtons" destination="f9q-u5-4oE" collectionClass="NSMutableArray" id="YzY-5l-ajn"/>
