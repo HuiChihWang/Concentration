@@ -22,6 +22,7 @@ class Concentration {
     
     
     var cards = [Card]()
+    var visitSet = Set<Int>()
     
     func shuffleCards(){
         cards.shuffle()
@@ -32,6 +33,7 @@ class Concentration {
     func Reset(){
         gameScore = 0
         cards.removeAll()
+        visitSet.removeAll()
         for _ in 1...numberPairCards {
             let card = Card()
             let matchingCard = card
@@ -56,7 +58,7 @@ class Concentration {
             indexOfOneAndOnlyFaceUpCard = nil
             
             
-            if cards[matchIndex].isVisit || cards[index].isVisit, !cards[index].isMatched{
+            if visitSet.contains(cards[index].identifier), !cards[index].isMatched{
                 gameScore -= 1;
                 gameScore = max(0, gameScore)
             }
@@ -75,6 +77,7 @@ class Concentration {
             
         }
         
+        visitSet.insert(cards[index].identifier)
     }
     
 }
