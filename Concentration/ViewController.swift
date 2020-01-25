@@ -22,13 +22,6 @@ class ViewController: UIViewController {
     lazy var game: Concentration = Concentration(numberOfPairsCard: (cardButtons.count + 1) / 2)
     
     
-    var flipCount = 0 {
-        didSet {
-            flipCountLabel.text = "Flip: \(flipCount)"
-        }
-    }
-    
-    
     @IBOutlet var cardButtons: [UIButton]!
     
     
@@ -40,12 +33,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             UpdateViewFromModel()
             scoreLabel.text = "Score: \(game.gameScore)"
+            flipCountLabel.text = "Flips: \(game.flipCount)"
         }
         else{
             print("Chosen card doesn't exist!")
@@ -57,7 +50,6 @@ class ViewController: UIViewController {
         let emojiSetIndex = Int(arc4random_uniform(UInt32(emojiSets.count)))
         emojiChoices = emojiSets[emojiSetIndex]
         mapIndexEmoji.removeAll()
-        flipCount = 0
         UpdateViewFromModel()
     }
     
@@ -89,8 +81,6 @@ class ViewController: UIViewController {
         
         return mapIndexEmoji[card.identifier] ?? "?"
     }
-    
-
     
 }
 

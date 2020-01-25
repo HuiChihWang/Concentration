@@ -18,7 +18,7 @@ class Concentration {
     
     var numberPairCards: Int = 0
     var gameScore: Int = 0
-    
+    var flipCount: Int = 0
     
     
     var cards = [Card]()
@@ -32,6 +32,7 @@ class Concentration {
     
     func Reset(){
         gameScore = 0
+        flipCount = 0
         cards.removeAll()
         visitSet.removeAll()
         for _ in 1...numberPairCards {
@@ -63,10 +64,9 @@ class Concentration {
                 gameScore = max(0, gameScore)
             }
             
-            cards[index].isVisit = true
-            cards[matchIndex].isVisit = true
+            flipCount += 1
         }
-        
+            
         else {
             for flipDownIndex in cards.indices{
                 cards[flipDownIndex].isFaceUp = false
